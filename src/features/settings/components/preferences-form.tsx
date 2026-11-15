@@ -1,18 +1,16 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { Database, Download, RotateCcw, Upload } from "lucide-react";
+import { Download, RotateCcw, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardTitle } from "@/components/ui/card";
 import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 import { storage } from "@/lib/storage/storage";
-import { seedDemoData } from "@/lib/storage/seed-demo";
 
 export function PreferencesForm() {
   const fileRef = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState("");
   const [confirmReset, setConfirmReset] = useState(false);
-  const [confirmDemo, setConfirmDemo] = useState(false);
 
   function exportData() {
     const blob = new Blob([JSON.stringify(storage.exportAll(), null, 2)], { type: "application/json" });
@@ -47,7 +45,6 @@ export function PreferencesForm() {
       <div className="flex flex-wrap gap-2">
         <Button variant="secondary" onClick={exportData}><Download size={16} /> Télécharger une sauvegarde</Button>
         <Button variant="outline" onClick={() => fileRef.current?.click()}><Upload size={16} /> Restaurer une sauvegarde</Button>
-        <Button variant="outline" onClick={() => setConfirmDemo(true)}><Database size={16} /> Charger des données de démo</Button>
         <Button variant="danger" onClick={() => setConfirmReset(true)}><RotateCcw size={16} /> Tout effacer</Button>
         <input ref={fileRef} type="file" accept="application/json,.json" className="hidden" onChange={(e) => importData(e.target.files?.[0])} />
       </div>
@@ -57,10 +54,6 @@ export function PreferencesForm() {
         description="Clients, produits, factures, reçus et paramètres seront supprimés de cet appareil. Cette action est irréversible."
         onCancel={() => setConfirmReset(false)}
         onConfirm={() => { storage.clearAll(); setConfirmReset(false); setMessage("Toutes les données ont été effacées."); }} />
-      <ConfirmDialog open={confirmDemo} title="Charger les données de démo ?" confirmLabel="Charger"
-        description="Vos clients, produits, factures et reçus actuels seront remplacés par des exemples. Vos paramètres d'entreprise sont conservés."
-        onCancel={() => setConfirmDemo(false)}
-        onConfirm={() => { seedDemoData(); setConfirmDemo(false); setMessage("Données de démo chargées."); }} />
     </Card>
   );
 }

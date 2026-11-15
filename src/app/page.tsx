@@ -5,7 +5,6 @@ import {
 import { DigiFactLogo } from "@/components/brand/digifact-logo";
 import { HeroMockup } from "@/components/brand/hero-mockup";
 import { buttonClasses } from "@/components/ui/button";
-import { DemoButton } from "@/features/dashboard/components/demo-button";
 
 const navLinks = [
   ["Accueil", "#accueil"],
@@ -79,7 +78,6 @@ export default function HomePage() {
             </ul>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/login" className={buttonClasses({ size: "lg" })}><Rocket size={18} /> Commencer maintenant <ArrowRight size={16} /></Link>
-              <DemoButton />
             </div>
           </div>
           <HeroMockup />
