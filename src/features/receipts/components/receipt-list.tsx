@@ -49,6 +49,29 @@ export function ReceiptList() {
   return (
     <div className="space-y-4">
       <SearchInput value={query} onChange={setQuery} placeholder="N° de reçu ou client…" />
+      <ul className="space-y-3 md:hidden">
+        {filtered.map((r) => (
+          <li key={r.id} className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+            <div className="flex items-start justify-between gap-3">
+              <div className="min-w-0">
+                <Link href={`/recus/${r.id}`} className="font-semibold text-slate-900">{r.number}</Link>
+                <p className="truncate text-sm text-slate-500">{clientOf(r.clientId)?.name ?? "Client supprimé"}</p>
+              </div>
+              <p className="shrink-0 text-base font-bold text-slate-900">{formatCurrency(r.amount, company.currency)}</p>
+            </div>
+            <p className="mt-2 text-xs text-slate-500">
+              {formatDate(r.date)} · {PAYMENT_METHODS[r.method].split(" (")[0]}{invoiceNumber(r.invoiceId) ? ` · ${invoiceNumber(r.invoiceId)}` : ""}
+            </p>
+            <div className="mt-3 flex justify-end gap-1 border-t border-slate-100 pt-2">
+              <Link href={`/recus/${r.id}`} aria-label={`Voir ${r.number}`} className="rounded-lg p-2 text-slate-500 hover:bg-slate-100"><Eye size={18} /></Link>
+              <button onClick={() => generateReceiptPdf(r, clientOf(r.clientId), company, invoiceNumber(r.invoiceId))} aria-label={`Télécharger ${r.number} en PDF`} className="rounded-lg p-2 text-slate-500 hover:bg-slate-100 hover:text-brand-600"><Download size={18} /></button>
+              <button onClick={() => setToDelete(r)} aria-label={`Supprimer ${r.number}`} className="rounded-lg p-2 text-slate-500 hover:bg-red-50 hover:text-red-600"><Trash2 size={18} /></button>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <div className="hidden md:block">
       <Table>
         <THead>
           <tr><Th>N°</Th><Th>Client</Th><Th>Facture</Th><Th>Date</Th><Th>Mode</Th><Th className="text-right">Montant</Th><Th className="w-28" /></tr>
@@ -73,6 +96,7 @@ export function ReceiptList() {
           ))}
         </tbody>
       </Table>
+      </div>
       {filtered.length === 0 && <p className="py-6 text-center text-sm text-slate-500">Aucun reçu ne correspond.</p>}
       <ConfirmDialog
         open={!!toDelete}

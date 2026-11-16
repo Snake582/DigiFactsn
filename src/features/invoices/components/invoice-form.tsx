@@ -106,7 +106,7 @@ function InvoiceFormInner({ invoice, defaultClientId, onSubmit, cancelHref }: In
         </Card>
       </div>
 
-      <div className="flex justify-end gap-2">
+      <div className="flex flex-wrap justify-end gap-2">
         <Link href={cancelHref} className={buttonClasses({ variant: "outline" })}>Annuler</Link>
         <Button type="submit">{invoice ? "Enregistrer les modifications" : "Créer la facture"}</Button>
       </div>

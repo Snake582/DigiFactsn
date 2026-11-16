@@ -36,8 +36,8 @@ export function InvoiceItems({ items, products, currency, errors, onChange }: In
       </div>
 
       {items.map((item, index) => (
-        <div key={item.id} className="grid gap-2 rounded-xl border border-slate-200 p-3 sm:grid-cols-[1fr_90px_130px_120px_32px] sm:items-start sm:border-0 sm:p-0">
-          <div>
+        <div key={item.id} className="grid grid-cols-2 gap-2 rounded-xl border border-slate-200 p-3 sm:grid-cols-[1fr_90px_130px_120px_32px] sm:items-start sm:border-0 sm:p-0">
+          <div className="col-span-2 sm:col-span-1">
             <input
               aria-label="Description"
               className={cn(fieldBase, errors[`items.${index}.description`] ? "border-red-400" : "border-slate-300")}
@@ -50,7 +50,7 @@ export function InvoiceItems({ items, products, currency, errors, onChange }: In
           <input aria-label="Quantité" type="number" min="0" step="any" className={cn(fieldBase, "border-slate-300")} value={item.quantity} onChange={(e) => update(item.id, { quantity: Number(e.target.value) })} />
           <input aria-label="Prix unitaire" type="number" min="0" step="any" className={cn(fieldBase, "border-slate-300")} value={item.unitPrice} onChange={(e) => update(item.id, { unitPrice: Number(e.target.value) })} />
           <p className="py-2.5 text-sm font-semibold text-slate-900 sm:text-right">{formatCurrency(item.quantity * item.unitPrice, currency)}</p>
-          <button type="button" onClick={() => onChange(items.filter((i) => i.id !== item.id))} aria-label="Supprimer la ligne" className="flex h-10 items-center justify-center rounded-lg text-slate-400 hover:bg-red-50 hover:text-red-600">
+          <button type="button" onClick={() => onChange(items.filter((i) => i.id !== item.id))} aria-label="Supprimer la ligne" className="flex h-10 items-center justify-center justify-self-end rounded-lg px-2 text-slate-400 hover:bg-red-50 hover:text-red-600">
             <Trash2 size={16} />
           </button>
         </div>
@@ -67,7 +67,7 @@ export function InvoiceItems({ items, products, currency, errors, onChange }: In
             aria-label="Ajouter depuis le catalogue"
             value=""
             onChange={(e) => addProduct(e.target.value)}
-            className="h-8 rounded-lg border border-slate-300 bg-white px-2 text-sm text-slate-700"
+            className="h-8 max-w-full rounded-lg border border-slate-300 bg-white px-2 text-sm text-slate-700"
           >
             <option value="">Ajouter depuis le catalogue…</option>
             {products.map((p) => (

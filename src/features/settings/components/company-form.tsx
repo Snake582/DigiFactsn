@@ -59,7 +59,7 @@ function CompanyFormInner({ initial, onSave }: { initial: Company; onSave: (c: C
           <Textarea label="Message en bas des documents" {...text("footerNote")} />
         </div>
       </Card>
-      <div className="flex items-center justify-end gap-3">
+      <div className="flex flex-wrap items-center justify-end gap-3">
         {saved && <span className="flex items-center gap-1 text-sm font-medium text-emerald-600"><Check size={16} /> Paramètres enregistrés</span>}
         <Button type="submit">Enregistrer</Button>
       </div>

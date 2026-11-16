@@ -87,7 +87,7 @@ function ReceiptFormInner({ defaultInvoiceId, onSubmit, cancelHref }: ReceiptFor
         <Input label="Référence" value={reference} onChange={(e) => setReference(e.target.value)} placeholder="N° de transaction, de chèque…" />
       </div>
       <Textarea label="Notes" value={notes} onChange={(e) => setNotes(e.target.value)} />
-      <div className="flex justify-end gap-2 pt-2">
+      <div className="flex flex-wrap justify-end gap-2 pt-2">
         <Link href={cancelHref} className={buttonClasses({ variant: "outline" })}>Annuler</Link>
         <Button type="submit">Générer le reçu</Button>
       </div>

@@ -20,10 +20,10 @@ export function DigiFactLogo({ variant = "dark", showTagline = false, className 
     <span className={cn("inline-flex items-center gap-2.5", className)}>
       <DigiFactMark />
       <span className="leading-none">
-        <span className={cn("block text-2xl font-extrabold tracking-tight", variant === "dark" ? "text-brand-900" : "text-white")}>
+        <span className={cn("block text-xl font-extrabold tracking-tight sm:text-2xl", variant === "dark" ? "text-brand-900" : "text-white")}>
           Digi<span className={variant === "dark" ? "text-brand-600" : "text-brand-400"}>Fact</span>
         </span>
-        {showTagline && <span className="mt-1 block text-xs text-slate-500">Votre facturation, simplifiée.</span>}
+        {showTagline && <span className="mt-1 hidden text-xs text-slate-500 sm:block">Votre facturation, simplifiée.</span>}
       </span>
     </span>
   );

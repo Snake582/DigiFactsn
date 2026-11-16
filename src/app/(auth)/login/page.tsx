@@ -22,7 +22,7 @@ export default function LoginPage() {
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-linear-to-b from-brand-50 to-white p-6">
-      <div className="w-full max-w-md rounded-3xl bg-white p-8 shadow-xl ring-1 ring-slate-100">
+      <div className="w-full max-w-md rounded-3xl bg-white p-6 shadow-xl sm:p-8 ring-1 ring-slate-100">
         <Link href="/" aria-label="Retour à l'accueil"><DigiFactLogo /></Link>
         <h1 className="mt-8 text-2xl font-bold text-slate-900">Bienvenue sur DigiFact</h1>
         <p className="mt-2 text-sm text-slate-500">

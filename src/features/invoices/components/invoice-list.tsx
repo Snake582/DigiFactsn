@@ -70,6 +70,33 @@ export function InvoiceList({ limitClientId }: { limitClientId?: string }) {
         )}
       </div>
 
+      <ul className="space-y-3 md:hidden">
+        {filtered.map((invoice) => (
+          <li key={invoice.id} className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+            <div className="flex items-start justify-between gap-3">
+              <div className="min-w-0">
+                <Link href={`/factures/${invoice.id}`} className="font-semibold text-slate-900">{invoice.number}</Link>
+                <p className="truncate text-sm text-slate-500">{clientName(invoice.clientId)}</p>
+              </div>
+              <InvoiceStatusBadge invoice={invoice} />
+            </div>
+            <div className="mt-3 flex items-end justify-between gap-3">
+              <div className="text-xs text-slate-500">
+                <p>Émise le {formatDate(invoice.issueDate)}</p>
+                <p>Échéance le {formatDate(invoice.dueDate)}</p>
+              </div>
+              <p className="text-base font-bold text-slate-900">{formatCurrency(invoiceTotal(invoice), company.currency)}</p>
+            </div>
+            <div className="mt-3 flex justify-end gap-1 border-t border-slate-100 pt-2">
+              <Link href={`/factures/${invoice.id}`} aria-label={`Voir ${invoice.number}`} className="rounded-lg p-2 text-slate-500 hover:bg-slate-100"><Eye size={18} /></Link>
+              <button onClick={() => generateInvoicePdf(invoice, clients.find((c) => c.id === invoice.clientId), company)} aria-label={`Télécharger ${invoice.number} en PDF`} className="rounded-lg p-2 text-slate-500 hover:bg-slate-100 hover:text-brand-600"><Download size={18} /></button>
+              <button onClick={() => setToDelete(invoice)} aria-label={`Supprimer ${invoice.number}`} className="rounded-lg p-2 text-slate-500 hover:bg-red-50 hover:text-red-600"><Trash2 size={18} /></button>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <div className="hidden md:block">
       <Table>
         <THead>
           <tr><Th>N°</Th><Th>Client</Th><Th>Émission</Th><Th>Échéance</Th><Th className="text-right">Total</Th><Th>Statut</Th><Th className="w-28" /></tr>
@@ -94,6 +121,7 @@ export function InvoiceList({ limitClientId }: { limitClientId?: string }) {
           ))}
         </tbody>
       </Table>
+      </div>
       {filtered.length === 0 && <p className="py-6 text-center text-sm text-slate-500">Aucune facture ne correspond à ces filtres.</p>}
 
       <ConfirmDialog

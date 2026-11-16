@@ -7,7 +7,7 @@ export function HeroMockup() {
     ["En retard", "50 000 FCFA", "bg-red-50 border-red-100"],
   ];
   return (
-    <div aria-hidden="true" className="relative mx-auto w-full max-w-xl">
+    <div aria-hidden="true" className="relative mx-auto w-full max-w-xl pb-8">
       <div className="overflow-hidden rounded-2xl border-[6px] border-slate-800 bg-white shadow-2xl shadow-brand-600/20">
         <div className="flex">
           <div className="hidden w-28 shrink-0 space-y-2 bg-brand-900 p-3 text-[10px] text-slate-300 sm:block">
@@ -32,7 +32,7 @@ export function HeroMockup() {
           </div>
         </div>
       </div>
-      <div className="absolute -bottom-6 -left-4 w-36 -rotate-6 rounded-lg border border-slate-200 bg-white p-3 shadow-xl sm:-left-10 sm:w-44">
+      <div className="absolute bottom-0 left-1 w-36 -rotate-6 rounded-lg border border-slate-200 bg-white p-3 shadow-xl sm:-left-6 sm:w-44">
         <p className="text-[10px] font-extrabold text-slate-900">FACTURE</p>
         <div className="mt-2 space-y-1">{[80, 60, 70, 50].map((w) => <div key={w} className="h-1 rounded bg-slate-200" style={{ width: `${w}%` }} />)}</div>
         <p className="mt-3 rounded bg-brand-600 px-2 py-1 text-[9px] font-bold text-white">Total : 1 230 000 FCFA</p>

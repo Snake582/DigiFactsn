@@ -52,6 +52,28 @@ export function ProductList() {
           </Select>
         </div>
       </div>
+      <ul className="space-y-3 md:hidden">
+        {filtered.map((p) => (
+          <li key={p.id} className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+            <div className="flex items-start justify-between gap-3">
+              <div className="min-w-0">
+                <Link href={`/produits/${p.id}`} className="font-semibold text-slate-900">{p.name}</Link>
+                {p.description && <p className="line-clamp-2 text-sm text-slate-500">{p.description}</p>}
+              </div>
+              <Badge tone={p.type === "service" ? "blue" : "orange"}>{p.type === "service" ? "Service" : "Produit"}</Badge>
+            </div>
+            <div className="mt-3 flex items-end justify-between gap-3">
+              <p className="text-base font-bold text-slate-900">{formatCurrency(p.price, company.currency)} <span className="text-xs font-normal text-slate-500">/ {p.unit}</span></p>
+              <div className="flex gap-1">
+                <Link href={`/produits/${p.id}`} aria-label={`Modifier ${p.name}`} className="rounded-lg p-2 text-slate-500 hover:bg-slate-100"><Pencil size={18} /></Link>
+                <button onClick={() => setToDelete(p)} aria-label={`Supprimer ${p.name}`} className="rounded-lg p-2 text-slate-500 hover:bg-red-50 hover:text-red-600"><Trash2 size={18} /></button>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <div className="hidden md:block">
       <Table>
         <THead>
           <tr>
@@ -78,6 +100,7 @@ export function ProductList() {
           ))}
         </tbody>
       </Table>
+      </div>
       {filtered.length === 0 && <p className="py-6 text-center text-sm text-slate-500">Aucun résultat.</p>}
       <ConfirmDialog
         open={!!toDelete}

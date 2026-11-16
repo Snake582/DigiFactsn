@@ -52,7 +52,7 @@ export function ClientForm({ client, onSubmit, cancelHref }: ClientFormProps) {
         <Input label="Ville" {...bind("city")} />
       </div>
       <Textarea label="Notes" placeholder="Informations utiles sur ce client" {...bind("notes")} />
-      <div className="flex justify-end gap-2 pt-2">
+      <div className="flex flex-wrap justify-end gap-2 pt-2">
         <Link href={cancelHref} className={buttonClasses({ variant: "outline" })}>Annuler</Link>
         <Button type="submit">Enregistrer le client</Button>
       </div>

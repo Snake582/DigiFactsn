@@ -53,7 +53,7 @@ export function ProductForm({ product, onSubmit, cancelHref }: ProductFormProps)
         <Input label="Unité *" value={unit} error={errors.unit} onChange={(e) => setUnit(e.target.value)} hint="Ex. : unité, heure, jour, mois, forfait" />
       </div>
       <Textarea label="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
-      <div className="flex justify-end gap-2 pt-2">
+      <div className="flex flex-wrap justify-end gap-2 pt-2">
         <Link href={cancelHref} className={buttonClasses({ variant: "outline" })}>Annuler</Link>
         <Button type="submit">Enregistrer</Button>
       </div>

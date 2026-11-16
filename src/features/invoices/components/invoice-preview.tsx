@@ -14,7 +14,7 @@ export function InvoicePreview({ invoice, client, company }: { invoice: Invoice;
   return (
     <article className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
       <div className="h-1.5 bg-brand-600" />
-      <div className="space-y-8 p-6 sm:p-10">
+      <div className="space-y-8 p-4 sm:p-10">
         <header className="flex flex-col gap-6 sm:flex-row sm:justify-between">
           <div className="flex gap-3">
             <DigiFactMark size={40} />
